@@ -9,7 +9,9 @@
   --btnDanger: #ff1307d2;
   --btnDangerLight: #ff726b;
   --white: white;
-  --default  :  white
+  --default  :  white;
+  --modalDark : #000000ae;
+  --modalLight : #ffffffae;
 }
 * {
   box-sizing: border-box;
@@ -24,7 +26,6 @@ body{
   /* justify-content: center; */
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   width: 100%;
 }
 
@@ -44,6 +45,7 @@ body{
   width: 80%;
   background-color: var(--lightBg);
   border-radius: 4px;
+  overflow: hidden;
   padding: 30px 20px;
 }
 
@@ -163,12 +165,13 @@ body{
   display: grid;
   width: 100%;
   height: auto;
+  overflow: scroll;
 }
 
 .row {
   display: flex;
-  justify-content: center;
   gap: 2px;
+  overflow: auto;
 }
 
 
@@ -199,10 +202,6 @@ body{
   display: flex;
   gap: 5px;
   justify-content: space-between;
-}
-
-.inputCheckBox {
-  display: none;
 }
 
 .p{
@@ -311,4 +310,78 @@ body{
 
 #theme-checkbox + label span:last-of-type {
   color: #c9c6c6;
+}
+
+.modal {
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  background-color: var(--modalDark);
+  z-index: 100;
+  left: 0;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.editContainer{
+  width: 30%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: var(--white);
+}
+
+.hide{
+  display: none;
+}
+
+@media (max-width : 992px) {
+  .editContainer{
+    width: 50%;
+  }
+}
+
+@media (max-width : 768px) {
+  .editContainer{
+    width: 90%;
+  }
+}
+
+.editInput{
+  width: 60%;
+  padding: 14px 20px;
+  outline: none;
+  border: none;
+  border-radius:3px ;
+  transition: 300ms all;
+  border: 1px solid var(--bgSecendory);
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: transparent;
+  margin-top: 30px;
+}
+
+.editInput:focus{
+  outline-color: var(--lightBg);
+}
+
+#close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: var(--white);
+  cursor: pointer;
+  font-size: xx-large;
 }

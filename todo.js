@@ -1,4 +1,10 @@
 let task = [];
+
+const handleModal = () => {
+  let edit = document.getElementById("modal")
+  edit.classList.toggle("hide");
+};
+
 const renderTask = () => {
   let table = `<div class="row">
     <div class="cColumn">Count</div>
@@ -19,10 +25,7 @@ const renderTask = () => {
       <div class="row">
       <div class="cColumn">${i + 1}</div>
       <div class="sColumn">
-      <input type="checkbox" id="checkBox" class="inputCheckBox" />
-      <label for="checkBox"
-      ><i class="fa-regular fa-circle-check"></i
-      ></label>
+      <input type="checkbox" id="checkBox"  class="inputCheckBox" />
       </div>
       <div class="tColumn">
       <div class="p">
@@ -33,7 +36,7 @@ const renderTask = () => {
       <button class="btnDanger" id="delete" onclick="handleDelete(${i})">
       <i class="fa-solid fa-trash-can"></i>
       </button>
-      <button class="btnInfo">
+      <button class="btnInfo" id="edit" onclick="handleModal()">
       <i class="fa-solid fa-pencil"></i>
       </button>
       </div>
@@ -70,6 +73,7 @@ document.getElementById("theme-checkbox").onclick = (e) => {
     root.style.setProperty("--btnDangerLight", "#ff726b");
     root.style.setProperty("--white", "black");
     root.style.setProperty("--default", "white");
+    root.style.setProperty("--modalLight" , "#ffffffae")
   } else {
     root.style.setProperty("--black", "#000000");
     root.style.setProperty("--font", "#1f2537");
@@ -83,3 +87,8 @@ document.getElementById("theme-checkbox").onclick = (e) => {
     root.style.setProperty("--default", "white");
   }
 };
+
+// let checked = document.getElementById("checkBox").onclick = () =>{
+//   let element  =  document.getElementById("icon")
+//   element.classList.toggle("");
+// }
