@@ -1,9 +1,21 @@
 let task = [];
-
-const handleModal = () => {
+let edit_Id = '';
+const handleModal = (id) => {
+  edit_Id = id;
   let edit = document.getElementById("modal")
   edit.classList.toggle("hide");
+  let editInputValue = document.getElementById("editInput");
+  editInputValue.value = task[edit_Id];
+  
 };
+
+const handleSave = ()=>{
+  let editInputValue = document.getElementById("editInput");
+  task.splice(edit_Id , 1 , editInputValue.value);
+  renderTask();
+  alert("Task saved successfully");
+  handleModal();
+}
 
 const renderTask = () => {
   let table = `<div class="row">
@@ -36,7 +48,7 @@ const renderTask = () => {
       <button class="btnDanger" id="delete" onclick="handleDelete(${i})">
       <i class="fa-solid fa-trash-can"></i>
       </button>
-      <button class="btnInfo" id="edit" onclick="handleModal()">
+      <button class="btnInfo" id="edit" onclick="handleModal(${i})">
       <i class="fa-solid fa-pencil"></i>
       </button>
       </div>
@@ -73,7 +85,7 @@ document.getElementById("theme-checkbox").onclick = (e) => {
     root.style.setProperty("--btnDangerLight", "#ff726b");
     root.style.setProperty("--white", "black");
     root.style.setProperty("--default", "white");
-    root.style.setProperty("--modalLight" , "#ffffffae")
+    root.style.setProperty("--modalDark" , "#ffffffae")
   } else {
     root.style.setProperty("--black", "#000000");
     root.style.setProperty("--font", "#1f2537");
@@ -87,6 +99,8 @@ document.getElementById("theme-checkbox").onclick = (e) => {
     root.style.setProperty("--default", "white");
   }
 };
+
+
 
 // let checked = document.getElementById("checkBox").onclick = () =>{
 //   let element  =  document.getElementById("icon")

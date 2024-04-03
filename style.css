@@ -157,7 +157,7 @@ body{
   outline-color: var(--lightBgDark);
   /* box-shadow: 0 0 10px var(--btnDanger); */
   background-color: var(--black);
-  color: var(--default);
+  color: var(--white);
   opacity: 1;
 }
 
@@ -326,6 +326,11 @@ body{
   backdrop-filter: blur(4px);
   justify-content: center;
   align-items: center;
+  transition: all 1s;
+}
+
+.m-1{
+  margin-top: 20px;
 }
 
 ::-webkit-scrollbar{
@@ -336,11 +341,21 @@ body{
   width: 30%;
   height: 400px;
   display: flex;
+  animation: animate 0.4s;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-radius: 4px;
   background-color: var(--white);
+}
+
+@keyframes animate {
+  from{
+    transform: translateY(-100%);
+  }
+  to{
+    transform: translateY(-0%);
+  }
 }
 
 .hide{
@@ -384,4 +399,9 @@ body{
   color: var(--white);
   cursor: pointer;
   font-size: xx-large;
+}
+
+.editTitle{
+  font-size: x-large;
+  color: var(--font);
 }
