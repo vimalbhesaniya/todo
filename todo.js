@@ -13,7 +13,7 @@ const handleSave = ()=>{
   let editInputValue = document.getElementById("editInput");
   task.splice(edit_Id , 1 , editInputValue.value);
   renderTask();
-  alert("Task saved successfully");
+  alert("🚀 Task saved successfully");
   handleModal();
 }
 
@@ -61,10 +61,17 @@ const renderTask = () => {
 };
 
 document.getElementById("add").addEventListener("click", (e) => {
+
   let value = document.getElementById("input").value;
-  task.push(value);
-  renderTask();
-  document.getElementById("input").value = "";
+  if (value) { 
+    task.push(value);
+    renderTask();
+    document.getElementById("input").value = "";
+  }
+  else{
+    alert("Please give your task to input..")
+  }
+
 });
 
 const handleDelete = (id) => {
