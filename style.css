@@ -213,6 +213,10 @@ body{
     white-space: nowrap;
 }
 
+.complete{
+  text-decoration: line-through;
+}
+
 .notFound{
   display: flex;
   justify-content: center;
@@ -404,4 +408,9 @@ body{
 .editTitle{
   font-size: x-large;
   color: var(--font);
+}
+
+.handleContainer{
+  display: flex;
+  gap: 10px;
 }

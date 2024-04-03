@@ -1,23 +1,44 @@
 let task = [];
-let edit_Id = '';
+let complete = [];
+let active = [];
+let edit_Id = "";
 const handleModal = (id) => {
   edit_Id = id;
-  let edit = document.getElementById("modal")
+  let edit = document.getElementById("modal");
   edit.classList.toggle("hide");
   let editInputValue = document.getElementById("editInput");
   editInputValue.value = task[edit_Id];
-  
 };
 
-const handleSave = ()=>{
+const handleSave = () => {
   let editInputValue = document.getElementById("editInput");
-  task.splice(edit_Id , 1 , editInputValue.value);
+  task.splice(edit_Id, 1, editInputValue.value);
   renderTask();
   alert("🚀 Task saved successfully");
   handleModal();
-}
+};
 
-const renderTask = () => {
+const handleCheckBox = (id) => {
+  let checkBox = document.getElementById(`${id}c`);
+  let target_Id = `${id}p`;
+  let target = document.getElementById(target_Id);
+  if (checkBox.checked) {
+    let completedTask = task.splice(id,1);
+    complete.push(completedTask[0]);
+    console.log(complete);
+    target.classList.toggle("complete");
+  }
+  else{
+    let inCompleted  = complete.splice(id , 1);
+    task.splice(id , 0  , inCompleted[0])
+    target.classList.toggle("complete");
+    console.log("COMPLETED " ,complete);
+    console.log("ALLL " , task);
+  }
+};
+
+
+const renderTask = (array) => {
   let table = `<div class="row">
     <div class="cColumn">Count</div>
     <div class="sColumn">Select</div>
@@ -32,15 +53,15 @@ const renderTask = () => {
             </div>
     `;
   } else {
-    task.forEach((e, i) => {
+    array.forEach((e, i) => {
       table += `
       <div class="row">
       <div class="cColumn">${i + 1}</div>
       <div class="sColumn">
-      <input type="checkbox" id="checkBox"  class="inputCheckBox" />
+      <input type="checkbox" id="${i+"c"}" onclick="handleCheckBox(${i})" class="inputCheckBox" />
       </div>
       <div class="tColumn">
-      <div class="p">
+      <div class="p" id="${i+"p"}">
       ${e}
       </div>
       </div>
@@ -61,22 +82,19 @@ const renderTask = () => {
 };
 
 document.getElementById("add").addEventListener("click", (e) => {
-
   let value = document.getElementById("input").value;
-  if (value) { 
+  if (value) {
     task.push(value);
-    renderTask();
+    renderTask(task);
     document.getElementById("input").value = "";
+  } else {
+    alert("Please give your task to input..");
   }
-  else{
-    alert("Please give your task to input..")
-  }
-
 });
 
 const handleDelete = (id) => {
   task.splice(id, 1);
-  renderTask();
+  renderTask(task);
 };
 
 document.getElementById("theme-checkbox").onclick = (e) => {
@@ -92,7 +110,7 @@ document.getElementById("theme-checkbox").onclick = (e) => {
     root.style.setProperty("--btnDangerLight", "#ff726b");
     root.style.setProperty("--white", "black");
     root.style.setProperty("--default", "white");
-    root.style.setProperty("--modalDark" , "#ffffffae")
+    root.style.setProperty("--modalDark", "#ffffffae");
   } else {
     root.style.setProperty("--black", "#000000");
     root.style.setProperty("--font", "#1f2537");
@@ -107,9 +125,18 @@ document.getElementById("theme-checkbox").onclick = (e) => {
   }
 };
 
-
-
 // let checked = document.getElementById("checkBox").onclick = () =>{
 //   let element  =  document.getElementById("icon")
 //   element.classList.toggle("");
 // }
+
+
+const handleFilter = (e) =>{
+  let target = document.getElementById("filter");
+  if (target.value == "complete") {
+    renderTask(complete)
+  }
+  else if(target.value == "all"){
+    renderTask([ ...complete , ...task])
+  }
+}
